@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PropertiesAndEncapsulation
@@ -46,14 +47,17 @@ namespace PropertiesAndEncapsulation
         {
             Name = name;
         }
+        // Auto implemented, read only property for Name.
         public string Name { get; }
 
+        // Full property with validation.
         private int health;
         public int Health
         {
             get { return health; }
             set
             {
+                // Clamp health values between 0 and 100.
                 if (value < 0)
                 {
                     health = 0;
@@ -68,8 +72,10 @@ namespace PropertiesAndEncapsulation
                 }
             }
         }
+        // Computed property.
         public bool IsAlive
         {
+            // If health is greater than 0, player is alive.
             get { return health > 0; }
         }
     }
@@ -81,12 +87,14 @@ namespace PropertiesAndEncapsulation
             Capacity = capacity;
         }
 
+        // Full property with validation.
         private int gold;
         public int Gold
         {
             get { return gold; }
             set
             {
+                // Prevent negative values for gold.
                 if (value < 0)
                 {
                     gold = 0;
@@ -97,14 +105,17 @@ namespace PropertiesAndEncapsulation
                 }
             }
         }
+        // Auto implemented, read only property.
         public int Capacity { get; }
 
+        // Full property with validation.
         private int itemCount;
         public int ItemCount
         {
             get { return itemCount; }
             set
             {
+                // Clamp items within inventory capacity.
                 if (value < 0)
                 {
                     itemCount = 0;
@@ -119,8 +130,10 @@ namespace PropertiesAndEncapsulation
                 }
             }
         }
+        // Computed property.
         public bool IsFull
         {
+            // If item count is greater than or equal to inventory capacity, it's full.
             get
             { return itemCount >= Capacity; }
         }
@@ -128,17 +141,21 @@ namespace PropertiesAndEncapsulation
 
     class PowerUp
     {
+        // Constructor, passing name and duration to properties.
         public PowerUp(string name = "Boost", float duration = 0)
         {
             Name = name;
             Duration = duration;
         }
 
+        // Auto implemented, read only property.
         public string Name { get; }
 
+        // Full property with validation.
         private float duration;
         public float Duration
         {
+            // Ensure duration won't be negative.
             get { return duration; }
             set
             {
@@ -152,6 +169,7 @@ namespace PropertiesAndEncapsulation
 
         public bool IsActive
         {
+            // If duration is greater than 0, powerup is active.
             get { return duration > 0; }
         }
     }
